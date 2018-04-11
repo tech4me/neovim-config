@@ -6,6 +6,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'mfulz/cscope.nvim'
@@ -29,6 +30,11 @@ map <C-n> :NERDTreeToggle<CR>
 " CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+
+" ack.vim with the silver searcher
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+endif
 
 " Mapping for terminal mode
 tnoremap <Esc> <C-\><C-n>
