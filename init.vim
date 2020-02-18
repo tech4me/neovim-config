@@ -5,11 +5,12 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
+Plug 'sheerun/vim-polyglot'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'mfulz/cscope.nvim'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 call plug#end()
 
@@ -36,9 +37,6 @@ if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
 
-" Mapping for terminal mode
-tnoremap <Esc> <C-\><C-n>
-
 " clang-format
 map <C-K> :pyf /usr/share/vim/addons/syntax/clang-format.py<cr>
 
@@ -60,6 +58,11 @@ set noswapfile
 
 filetype plugin on
 
+" Auto reload buffer
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+autocmd FileChangedShellPost *
+  \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+
 " Search
 set incsearch
 set ignorecase
@@ -69,6 +72,9 @@ nnoremap  <silent> <Space> :nohlsearch<Bar>:echo<CR>
 " Easy buffer switch
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
+
+" Use system clipboard
+set clipboard=unnamedplus
 
 " Use per project .nvimrc
 set exrc
